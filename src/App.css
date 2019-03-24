@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background: red;
 }
 
 .App-logo {
@@ -10,7 +11,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,9 +19,22 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.App-header .ant-btn-primary{
+  background-color: #0c1014 !important;
+}
+
+.App-body{
+  height: 50vh;
+}
 
 .App-link {
   color: #61dafb;
+}
+
+.ant-drawer-content-wrapper {
+  right: 20px !important;
+  bottom: 20px !important;
+  height: calc(100% - 50vh - 20px) !important;
 }
 
 @keyframes App-logo-spin {
