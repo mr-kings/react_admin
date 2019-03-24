@@ -1,0 +1,10 @@
+.headerWrap{
+    background: '#fff';
+    padding: 0;
+}
+.contentWrap, .ant-layout-content {
+    min-height: calc(100% - 64px - 48px)!important;
+    margin: 24px 16px;
+    padding: 24px;
+    background: '#fff';
+}
