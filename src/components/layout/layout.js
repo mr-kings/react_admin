@@ -12,7 +12,7 @@ const {
     Content
 } = Layout;
 
-export default class SiderDemo extends React.Component {
+class SiderDemo extends React.Component {
     state = {
         collapsed: false,
     };
@@ -63,3 +63,5 @@ export default class SiderDemo extends React.Component {
         );
     }
 }
+
+export default SiderDemo;
