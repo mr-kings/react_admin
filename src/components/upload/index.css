@@ -1,0 +1,87 @@
+.uploadWrap{
+    width: 100%;
+    height: 100%;
+}
+.uploadWrap .error {
+    color: red!important;
+}
+.uploadListWrap{
+    overflow: hidden;
+    width: 100%;
+    min-height: 120px;
+    margin-top: 16px;
+    padding: 2px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.uploadListWrap .uploadItem{
+    width: 100%;
+    height: 50px;
+    margin: 6px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.uploadListWrap.inline .uploadItem {
+    width: 45%;
+    float: left;
+}
+.uploadListWrap.inline .uploadItem:nth-child(2n) {
+    margin-left: 10%;
+}
+.uploadListWrap .uploadItem .itemLogo {
+    overflow: hidden;
+    display: inline-block;
+    height: 100%;
+    width: 50px;
+    line-height: 60px;
+    text-align: center;
+}
+.itemPicIcon{
+    font-size: 30px;
+}
+.uploadListWrap .uploadItem .itemLogo img{
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}
+.uploadListWrap .uploadItem .itemName {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    padding-left: 10px;
+    height: 100%;
+    line-height: 50px;
+    width: calc(100% - 110px);
+}
+.progress{
+    position: absolute;
+    bottom: 6px;
+    width: 100%;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.11);
+    border-radius: 10px;
+}
+.dot{
+    position: absolute;
+    bottom: 0px;
+    width: 50%;
+    height: 2px;
+    background: green;
+}
+.uploadListWrap .uploadItem .itemRemove {
+    overflow: hidden;
+    display: inline-block;
+    height: 100%;
+    width: 60px;
+    line-height: 50px;
+    text-align: center;
+}
+.uploadListWrap .uploadItem .itemRemove .itemRemoveIcon {
+    cursor: pointer;
+    color: #ccc;
+    transition: all 1s;
+}
+.uploadListWrap .uploadItem .itemRemove .itemRemoveIcon:hover {
+    color: #f5222d;
+    transition: all 1s;
+}

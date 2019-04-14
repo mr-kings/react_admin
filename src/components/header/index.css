@@ -1,0 +1,48 @@
+.headerWrap{
+    width: 100%;
+    overflow: hidden;
+}
+.avatar {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    line-height: 1;
+    border-radius: 500px;
+    white-space: nowrap;
+    font-weight: bold;
+}
+.avatar img {
+    border-radius: 50%;
+    width: 100%;
+}
+.avatar i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    margin: 1px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 100%;
+}
+.avatar i.bottom {
+    left: auto;
+    top: auto;
+    bottom: 0;
+    right: 0;
+}
+.avatar i.on {
+    background-color: #6cc788;
+}
+.headerWrap .ant-menu{
+    background-color: transparent;
+}
+.headerWrap i{
+    color: #ffffff;
+}
+.headerWrap .ant-menu-item .anticon,
+.headerWrap .ant-menu-submenu-title .anticon {
+    margin-right: 0 !important;
+    font-size: 22px!important;
+}
