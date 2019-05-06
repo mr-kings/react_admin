@@ -3,23 +3,19 @@ import {Link} from 'react-router-dom';
 import './index.css';
 
 export default class Error401 extends Component {
-    state = {
-        time: 9,
-    };
-
-    handleGoBack = () => {
-        this.props.history.goBack();
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            time: 9,
+        }
+    }
 
     componentDidMount() {
         this.bodyOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
-
         this.sI = setInterval(() => {
             const time = this.state.time - 1;
-
             // 调转登录页 if (time === 0);
-
             this.setState({time});
         }, 1000);
     }
@@ -28,6 +24,10 @@ export default class Error401 extends Component {
         clearInterval(this.sI);
         document.body.style.overflow = this.bodyOverflow;
     }
+
+    handleGoBack = () => {
+        this.props.history.goBack();
+    };
 
     render() {
         const {history} = this.props;

@@ -56,6 +56,11 @@ class CustomUpload extends Component {
         }
     }
 
+    // 组件挂载成功后
+    componentDidMount(){
+
+    }
+
     // 上传前事件
     handleBeforeUpload = (file, fileList) => {
         console.log('handleBeforeUpload file', file)
@@ -126,11 +131,6 @@ class CustomUpload extends Component {
         console.log('handleRemove file', file)
     }
 
-    // 组件挂载成功后
-    componentDidMount(){
-
-    }
-
     render(){
         // 获取已上传的文件
         const {fileList} = this.state;
@@ -168,7 +168,7 @@ class CustomUpload extends Component {
                         <div className="uploadItem" key={item.uid}>
                             <div className="itemLogo">
                                 {/* <img src={item.thumbUrl} alt={item.name}/> */}
-                                <Icon className="itemPicIcon" type={item.type}/>
+                                <Icon className="itemPicIcon" type={item.type} />
                             </div>
                             <div className="itemName">
                                 {
@@ -180,13 +180,13 @@ class CustomUpload extends Component {
                                 }
                                 {
                                     item.status === 'uploading' ? <div className="progress">
-                                        <div className="dot" style={{width: item.percent+'%'}}></div>
+                                        <div className="dot" style={{width: item.percent+'%'}} />
                                     </div> : null
                                 }
                             </div>
                             <div className="itemRemove">
                                 {
-                                    item.status === 'error' ? <Icon className="error itemRemoveIcon" type="delete" title="删除该文件" onClick={this.handleRemove.bind(this,item)}/> : <Icon className="itemRemoveIcon" type="delete" title="删除该文件" onClick={this.handleRemove.bind(this,item)}/>
+                                    item.status === 'error' ? <Icon className="error itemRemoveIcon" type="delete" title="删除该文件" onClick={this.handleRemove.bind(this,item)} /> : <Icon className="itemRemoveIcon" type="delete" title="删除该文件" onClick={this.handleRemove.bind(this,item)} />
                                 }
                             </div>
                         </div>

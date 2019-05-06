@@ -46,3 +46,8 @@
     margin-right: 0 !important;
     font-size: 22px!important;
 }
+
+.header__trigger{
+    font-size: 20px;
+    margin-left: -34px;
+}

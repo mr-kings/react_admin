@@ -23,28 +23,36 @@ class LayoutComponent extends Component {
             title: ''
         }
     }
+
     // 展开收起
-    onCollapse = (collapsed) => {
-        this.setState({ collapsed });
+    onCollapse = () => {
+        this.setState({ collapsed: !this.state.collapsed});
     }
 
     // 设置title
-    setTitle = (route) => {
-        console.log('setTitle', route)
-        if (this.state.title === route.title) return;
-        //this.setState({ title: route.title });
+    setTitle = (title) => {
+        console.log('setTitle', title)
+        if (this.state.title === title) return;
+        this.setState({ title: title });
+    }
+
+    // 路由切换回调
+    onRouterChange = (route) => {
+        console.log('路由切换回调', route)
+        //this.setTitle(route.title);
     }
 
     render() {
+        const {collapsed,title} = this.state;
         return (
             <Layout className="layoutWrap">
-                <CustomSide collapsed={this.state.collapsed}></CustomSide>
+                <CustomSide collapsed={collapsed} />
                 <Layout>
-                    <CustomHeader></CustomHeader>
+                    <CustomHeader toggle={this.onCollapse} collapsed={collapsed} />
                     <Content className="contentWrap">
-                        <CustomBreadcrumb first={this.state.title}></CustomBreadcrumb>
+                        <CustomBreadcrumb first={title} />
                         <div className="contentBox">
-                            <Routes onRouterChange={this.setTitle} />
+                            <Routes onRouterChange={this.onRouterChange} />
                         </div>
                     </Content>
                     <Footer className="footerWrap">

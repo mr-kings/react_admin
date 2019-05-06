@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import screenfull from 'screenfull';
-import avater from '../../assets/imgs/avater.jpg';
+import avater from '../../assets/imgs/avater.png';
 import {
     Menu,
     Icon,
     Layout,
-    Badge,
 } from 'antd';
 import './index.css';
 const {
@@ -33,7 +32,12 @@ class CustomHeader extends Component {
     render(){
         return (
             <div className="headerWrap">
-                <Header className="custom-theme header" >
+                <Header className="custom-header" >
+                    <Icon
+                        className="header__trigger"
+                        type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'}
+                        onClick={this.props.toggle}
+                    />
                     <Menu
                         mode="horizontal"
                         style={{ lineHeight: '64px', float: 'right' }}
@@ -41,11 +45,11 @@ class CustomHeader extends Component {
                         <Menu.Item key="full" onClick={this.screenFull} >
                             <Icon className="headerIcon" type="arrows-alt" onClick={this.screenFull} />
                         </Menu.Item>
-                        <Menu.Item key="1">
+                        {/* <Menu.Item key="1">
                             <Badge count={25} overflowCount={10} style={{marginLeft: 10}}>
                                 <Icon type="notification" />
                             </Badge>
-                        </Menu.Item>
+                        </Menu.Item> */}
                         <SubMenu title={<span className="avatar"><img src={avater} alt="头像" /><i className="on bottom b-white" /></span>}>
                             <MenuItemGroup title="用户中心">
                                 <Menu.Item key="setting:2">个人信息</Menu.Item>

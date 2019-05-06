@@ -3,33 +3,36 @@ import {Link} from 'react-router-dom';
 import './index.css';
 
 export default class Error404 extends Component {
-    state = {
-        time: 9,
-    };
+    constructor(props){
+        super(props);
+        this.state = {
+            time: 9,
+        }
+    }
 
-    handleGoBack = () => {
-        this.props.history.goBack();
-    };
-
+    // 组件挂载成功
     componentDidMount() {
         this.bodyOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
-
         if (this.props.history.length >= 2) {
             this.sI = setInterval(() => {
                 const time = this.state.time - 1;
-
                 if (time === 0) this.handleGoBack();
-
                 this.setState({time});
             }, 1000);
         }
     }
 
+    // 组件卸载
     componentWillUnmount() {
         clearInterval(this.sI);
         document.body.style.overflow = this.bodyOverflow;
     }
+
+    // 返回
+    handleGoBack = () => {
+        this.props.history.goBack();
+    };
 
     render() {
         const {history} = this.props;

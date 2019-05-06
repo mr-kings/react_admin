@@ -4,9 +4,19 @@ import AllComponents from '../views/index';
 import routesConfig from './config';
 import queryString from 'query-string';
 
+/**
+ * @auther kim
+ * @date 2019-5-6
+ * @description 自定义路由
+ * @class CustomRouter
+ * @extends {Component}
+ * TODO: 路由生成
+ */
 class CustomRouter extends Component {
+    onRouterChange = (route) => {
+        this.props.onRouterChange(route);
+    }
     render() {
-        const { onRouterChange } = this.props;
         return (
             <Switch>
                 {
@@ -31,7 +41,8 @@ class CustomRouter extends Component {
                                             props.match.params = { ...params };
                                             const merge = { ...props, query: queryParams ? queryString.parse(queryParams[0]) : {} };
                                             // 回传route配置
-                                            onRouterChange && onRouterChange(r);
+                                            this.onRouterChange(r);
+                                            // 这里还需做权限校验
                                             return <Component {...merge} />
                                         }}
                                     />
