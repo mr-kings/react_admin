@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import screenfull from 'screenfull';
-import avater from '../../assets/imgs/avater.png';
+import avater from '@/assets/imgs/avater.png';
 import {
     Menu,
     Icon,

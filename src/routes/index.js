@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import AllComponents from '../views/index';
+import AllComponents from '@/views/index';
 import routesConfig from './config';
 import queryString from 'query-string';
 

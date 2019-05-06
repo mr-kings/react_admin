@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Layout } from 'antd';
-import Routes from '../../routes/index';
+import Routes from '@/routes/index';
 import CustomHeader from '../header/index';
 import CustomSide from '../siderBar/index';
 import CustomBreadcrumb from '../breadcrumb/index';
