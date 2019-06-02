@@ -70,14 +70,18 @@ class CustomUpload extends Component {
         const isJPEG = file.type === 'image/jpeg';
         const isGIF = file.type === 'image/gif';
         const isPDF = file.type === 'application/pdf';
-        if (!(isJPG || isJPEG || isGIF || isPNG || isPDF)) {
-            message.error('只能上传JPG 、JPEG 、GIF、 PNG格式的图片或PDF格式的文件~');
+        const isDoc = file.type === 'application/msword';
+        const isDocx = file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+        const isPic = isJPG || isJPEG || isGIF || isPNG;
+        const isWord = isDoc || isDocx;
+        if (!(isPic || isWord || isPDF)) {
+            message.error('只能上传JPG 、JPEG 、GIF、 PNG格式的图片或PDF、DOC、DOCX格式的文件~');
         }
         const isLt2M = file.size / 1024 / 1024 < 2;
         if (!isLt2M) {
             message.error('超过2M限制 不允许上传~');
         }
-        return (isJPG || isJPEG || isGIF || isPNG || isPDF) && isLt2M;
+        return (isPic || isWord || isPDF) && isLt2M;
     }
 
     // 上传文件改变状态是
@@ -138,8 +142,9 @@ class CustomUpload extends Component {
         const className = inline ? "uploadListWrap inline" : "uploadListWrap";
         // 上传属性
         const props = {
-            accept: '.doc, .docx, .jpg, .png, .pdf, .jpeg', // 上传支持的格式
-            action: '//jsonplaceholder.typicode.com/posts/', // 文件上传服务器
+            name: 'files',
+            accept: 'image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document', // 上传支持的格式
+            action: 'https://gdpo-test.yun.city.pingan.com/gdyqpt/api/obsInfo/upload/file', // 文件上传服务器
             directory: false, // 是否支持上传文件夹
             onChange: this.handleChange, // 上传回调函数
             customRequest: this.handleCustomResquest, // 自定义上传

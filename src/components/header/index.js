@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import screenfull from 'screenfull';
+import moment from 'moment';
 import avater from '@/assets/imgs/avater.png';
 import {
     Menu,
     Icon,
     Layout,
+    Radio
 } from 'antd';
+import ThemeColorPicker from '../header-color-picker/index';
 import './index.css';
 const {
     Header
@@ -22,6 +25,13 @@ const MenuItemGroup = Menu.ItemGroup;
  */
 class CustomHeader extends Component {
 
+    constructor() {
+        super();
+        this.state = {
+            locale: null,
+        };
+    }
+
     // 全屏操作
     screenFull = () => {
         if (screenfull.enabled) {
@@ -29,7 +39,18 @@ class CustomHeader extends Component {
         }
     };
 
+    changeLocale = e => {
+        const localeValue = e.target.value;
+        this.setState({ locale: localeValue });
+        if (!localeValue) {
+            moment.locale('en');
+        } else {
+            moment.locale('zh-cn');
+        }
+    };
+
     render(){
+        const { locale } = this.state;
         return (
             <div className="headerWrap">
                 <Header className="custom-header" >
@@ -43,13 +64,21 @@ class CustomHeader extends Component {
                         style={{ lineHeight: '64px', float: 'right' }}
                     >
                         <Menu.Item key="full" onClick={this.screenFull} >
-                            <Icon className="headerIcon" type="arrows-alt" onClick={this.screenFull} />
+                            <Icon className="headerIcon" type="fullscreen" onClick={this.screenFull} />
                         </Menu.Item>
-                        {/* <Menu.Item key="1">
-                            <Badge count={25} overflowCount={10} style={{marginLeft: 10}}>
-                                <Icon type="notification" />
-                            </Badge>
-                        </Menu.Item> */}
+                        <Menu.Item key="color" >
+                            <ThemeColorPicker />
+                        </Menu.Item>
+                        <Menu.Item key="i18n" >
+                            <Radio.Group defaultValue={undefined} onChange={this.changeLocale}>
+                                <Radio.Button key="en" value={undefined}>
+                                English
+                                </Radio.Button>
+                                <Radio.Button key="cn" value={undefined}>
+                                中文
+                                </Radio.Button>
+                            </Radio.Group>
+                        </Menu.Item>
                         <SubMenu title={<span className="avatar"><img src={avater} alt="头像" /><i className="on bottom b-white" /></span>}>
                             <MenuItemGroup title="用户中心">
                                 <Menu.Item key="setting:2">个人信息</Menu.Item>
