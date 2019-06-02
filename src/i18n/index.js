@@ -1,25 +1,29 @@
-import React from 'react';
-import {LocaleProvider} from 'antd';
+import React,{ Component } from 'react';
+import { LocaleProvider } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import enGB from 'antd/lib/locale-provider/en_GB';
 import moment from 'moment';
 import 'moment/locale/zh-cn'; // 解决 antd 日期组件国际化问题
-import {connect} from '@/models';
-import allI18n, {defaultLang} from './index';
+import {observer,inject} from "mobx-react";
+import {
+    IntlProvider,
+    addLocaleData,
+} from 'react-intl';
 
-@connect(state => {
-    return {
-        local: state.system.local,
-        autoLocal: state.system.autoLocal,
-    }
-})
-export default class Local extends React.Component {
+/**
+ * 国际化
+ * @class LocalLanguage
+ * @extends {Component}
+ */
+@inject('systemStore')
+@observer
+class LocalLanguage extends Component {
     constructor(...props) {
         super(...props);
         let {local, autoLocal} = this.props;
 
         // 不基于浏览器自动获取，将语言设置为默认
-        if (!autoLocal) local = defaultLang.local;
+        if (!autoLocal) local = this.props.systemStore.getDefaultLocal.local;
 
         // 从浏览器存储中恢复语言
         const storeLocal = window.localStorage.getItem('system-local');
@@ -31,11 +35,12 @@ export default class Local extends React.Component {
             local = getLocalByBrowser();
         }
 
-        this.props.action.system.setLocal(local);
+        // 设置本地语言
+        this.props.systemStore.setCurrentLocal(local);
 
         function getLocalByBrowser() {
             const type = navigator.appName;
-            const defaultLocal = 'en_GB'; // 如果未获取到，默认语言为英文
+            const defaultLocal = 'en_gb'; // 如果未获取到，默认语言为英文
             let lang;
 
             if (type === 'Netscape') {
@@ -48,8 +53,9 @@ export default class Local extends React.Component {
 
             lang = lang.replace('-', '_');
 
-            const exactLang = allI18n.find(item => item.local === lang);
-            const firstTowCharLang = allI18n.find(item => item.local.substr(0, 2) === lang.substr(0, 2));
+            const {localList} = this.props.systemStore;
+            const exactLang = localList.find(item => item.local === lang);
+            const firstTowCharLang = localList.find(item => item.local.substr(0, 2) === lang.substr(0, 2));
 
             // 完全匹配了
             if (exactLang) return exactLang.local;
@@ -65,26 +71,28 @@ export default class Local extends React.Component {
 
     render() {
         const {children, local} = this.props;
-
-        // FIXME 更多语言支持
-        const momentLocalMap = {
-            'zh_CN': 'zh-cn',
-            'en_GB': 'en-gb',
-        };
+        const appLocale = this.props.systemStore.getCurrentLocal;
+        addLocaleData(appLocale.data);
         const antLocalMap = {
-            'zh_CN': zhCN,
-            'en_GB': enGB,
+            'zh-cn': zhCN,
+            'en-gb': enGB,
         };
 
-        const momentLocal = momentLocalMap[local];
-        if (momentLocal) moment.locale(momentLocal);
+        if (local) moment.locale(local);
 
         const antLan = antLocalMap[local];
 
         return (
             <LocaleProvider locale={antLan}>
-                {children}
+                <IntlProvider
+                    locale={appLocale.locale}
+                    messages={appLocale.messages}
+                >
+                    {children}
+                </IntlProvider>
             </LocaleProvider>
         );
     }
 }
+
+export default LocalLanguage;

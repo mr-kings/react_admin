@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
+import {observer,inject} from "mobx-react";
 import screenfull from 'screenfull';
-import moment from 'moment';
 import avater from '@/assets/imgs/avater.png';
 import {
     Menu,
@@ -23,12 +23,13 @@ const MenuItemGroup = Menu.ItemGroup;
  * @class CustomHeader
  * @extends {Component}
  */
+@inject('systemStore')
+@observer
 class CustomHeader extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            locale: null,
         };
     }
 
@@ -39,18 +40,15 @@ class CustomHeader extends Component {
         }
     };
 
+    // 切换语言
     changeLocale = e => {
         const localeValue = e.target.value;
-        this.setState({ locale: localeValue });
-        if (!localeValue) {
-            moment.locale('en');
-        } else {
-            moment.locale('zh-cn');
-        }
+        this.props.systemStore.setCurrentLocal(localeValue);
     };
 
     render(){
-        const { locale } = this.state;
+        const {currentLocal} = this.props.systemStore;
+        console.info('11',currentLocal)
         return (
             <div className="headerWrap">
                 <Header className="custom-header" >
@@ -70,11 +68,11 @@ class CustomHeader extends Component {
                             <ThemeColorPicker />
                         </Menu.Item>
                         <Menu.Item key="i18n" >
-                            <Radio.Group defaultValue={undefined} onChange={this.changeLocale}>
-                                <Radio.Button key="en" value={undefined}>
+                            <Radio.Group defaultValue={currentLocal.antd.locale} onChange={this.changeLocale}>
+                                <Radio.Button key="en_gb" value="en-gb">
                                 English
                                 </Radio.Button>
-                                <Radio.Button key="cn" value={undefined}>
+                                <Radio.Button key="zh_cn" value="zh-cn">
                                 中文
                                 </Radio.Button>
                             </Radio.Group>

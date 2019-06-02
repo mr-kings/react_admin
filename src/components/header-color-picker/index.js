@@ -104,13 +104,13 @@ export default class ThemeColorPicker extends Component {
         } = this.props;
         const {toolTipVisible} = this.state;
         return (
-            <div styleName="root" className={`theme-color-picker ${className}`}>
+            <div className={`colorPickRoot theme-color-picker ${className}`}>
                 <Tooltip
                     visible={toolTipVisible}
                     placement="bottom"
                     title="切换主题色"
                 >
-                    <div styleName="picker"
+                    <div className="picker"
                         onMouseEnter={this.handleToolTipShow}
                         onMouseLeave={() => this.handleToolTipHide()}
                     >

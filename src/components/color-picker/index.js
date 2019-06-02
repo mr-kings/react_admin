@@ -93,12 +93,12 @@ export default class Index extends Component {
 
         const swatch = (
             <div style={styles.swatch} onClick={this.handleClick}>
-                <div style={styles.color}/>
+                <div style={styles.color} />
             </div>
         );
         const picker = displayColorPicker ? (
             <div style={styles.popover}>
-                <div style={styles.cover} onClick={this.handleClose}/>
+                <div style={styles.cover} onClick={this.handleClose} />
                 <div style={styles.wrapper}>
                     <Picker
                         {...this.props}

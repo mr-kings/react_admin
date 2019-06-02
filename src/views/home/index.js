@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import './index.css';
+import {
+    FormattedMessage,
+} from 'react-intl';
 
 class Home extends Component {
     render() {
         return (
             <div className="homeWrap">
-                首页
+                <FormattedMessage id="home.name" />
             </div>
         );
     }
