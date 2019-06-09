@@ -21,7 +21,7 @@ module.exports = {
     '@border-color-base': '#d9d9d9', // 边框色
     '@box-shadow-base': '0 2px 8px rgba(0, 0, 0, .15)', // 浮层阴影
 
-    // '@layout-header-background': '#001529',                 // 深色主题样式
-    '@layout-header-background': '#000', // 深色主题样式
+    '@layout-header-background': '#001529', // 深色主题样式
+    //'@layout-header-background': '#000', // 深色主题样式
     '@menu-dark-submenu-bg': 'lighten(@layout-header-background, 5%)',
 };

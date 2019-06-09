@@ -5,7 +5,7 @@
  * @description 路由组件
  */
 import Loadable from 'react-loadable';
-import Loading from '../components/widget/Loading';
+import Loading from '@/components/spinnerLoading/index';
 
 const upload = Loadable({ // 按需加载
     loader: () => import('../components/upload/index'),

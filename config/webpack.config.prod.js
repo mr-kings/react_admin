@@ -1,4 +1,4 @@
-'use strict';
+
 
 const path = require('path');
 const webpack = require('webpack');
@@ -18,6 +18,8 @@ const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+
+const theme = require('../src/theme');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -89,6 +91,8 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
 			loader: require.resolve(preProcessor),
 			options: {
 				sourceMap: shouldUseSourceMap,
+				javascriptEnabled: true,
+				modifyVars: theme,
 			},
 		});
 	}
@@ -400,7 +404,7 @@ module.exports = {
 					{
 						test: lessRegex,
 						exclude: lessModuleRegex,
-						loader: getStyleLoaders({ 
+						loader: getStyleLoaders({
 							importLoaders: 2,
 							sourceMap: shouldUseSourceMap,
 						}, 'less-loader'),

@@ -26,24 +26,29 @@ export default class Index extends Component {
     }
 
     state = {
+        color: this.props.color,
         displayColorPicker: false,
     };
 
+    // 点击事件
     handleClick = () => {
         const {displayColorPicker} = this.state;
         this.setState({displayColorPicker: !displayColorPicker});
     };
 
+    // 关闭事件
     handleClose = () => {
         this.setState({displayColorPicker: false});
     };
 
+    // 颜色切换
     handleChange = color => {
         const {onChange} = this.props;
         this.setState({color: color.hex});
         onChange(color.hex, color);
     };
 
+    // 颜色切换成功
     handleChangeComplete = color => {
         const {onChangeComplete} = this.props;
         this.setState({color: color.hex});

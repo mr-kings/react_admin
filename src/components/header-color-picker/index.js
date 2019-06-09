@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Icon, Tooltip} from 'antd';
+import {Icon} from 'antd';
 import {loadScript} from '@/utils/index';
 import ColorPicker from '@/components/color-picker';
 import theme from '@/theme';
@@ -17,6 +17,10 @@ export default class ThemeColorPicker extends Component {
     constructor(...props) {
         super(...props);
 
+        this.state = {
+            primaryColor: window.localStorage.getItem('theme-style')||theme['@primary-color']
+        }
+
         // 快速生效
         const themeStyleContent = window.localStorage.getItem('theme-style-content');
         if (themeStyleContent) {
@@ -32,12 +36,7 @@ export default class ThemeColorPicker extends Component {
         // .less文件加载完成之后，生成主题，localStorage中的主题有可能过时，需要覆盖
         if (primaryColor) this.handleColorChange(primaryColor);
 
-        //this.props.addEventListener(document, 'click', () => this.handleToolTipHide(0));
     }
-
-    state = {
-        toolTipVisible: false,
-    };
 
     // 选中颜色
     handleColorChange = color => {
@@ -49,7 +48,10 @@ export default class ThemeColorPicker extends Component {
                 })
                 .then(() => {
                     Icon.setTwoToneColor({primaryColor: color});
-                    this.props.action.system.setPrimaryColor(color);
+                    window.localStorage.setItem('theme-style', color);
+                    this.setState({
+                        primaryColor: color
+                    })
 
                     // 先清除缓存样式
                     const oldStyle = document.getElementById(OLD_LESS_ID);
@@ -82,61 +84,44 @@ export default class ThemeColorPicker extends Component {
             loadScript(LESS_URL).then(() => {
                 this.lessLoaded = true;
                 changeColor();
+            }).catch(()=>{
+                console.info('加载不到less.min.js文件')
             });
         }
     };
 
-    handleToolTipShow = () => {
-        if (this.ST) clearTimeout(this.ST);
-        this.setState({toolTipVisible: true});
-    };
-
-    handleToolTipHide = (time = 300) => {
-        this.ST = setTimeout(() => {
-            this.setState({toolTipVisible: false})
-        }, time);
-    };
-
     render() {
         const {
-            primaryColor = theme['@primary-color'],
             className,
         } = this.props;
-        const {toolTipVisible} = this.state;
+        const {
+            primaryColor,
+        } = this.state;
         return (
             <div className={`colorPickRoot theme-color-picker ${className}`}>
-                <Tooltip
-                    visible={toolTipVisible}
-                    placement="bottom"
-                    title="切换主题色"
-                >
-                    <div className="picker"
-                        onMouseEnter={this.handleToolTipShow}
-                        onMouseLeave={() => this.handleToolTipHide()}
-                    >
-                        <ColorPicker
-                            type="sketch"
-                            small
-                            color={primaryColor}
-                            position="bottom"
-                            presetColors={[
-                                '#F5222D',
-                                '#FA541C',
-                                '#FA8C16',
-                                '#FAAD14',
-                                '#FADB14',
-                                '#A0D911',
-                                '#52C41A',
-                                '#13C2C2',
-                                '#1890FF',
-                                '#2F54EB',
-                                '#722ED1',
-                                '#EB2F96',
-                            ]}
-                            onChangeComplete={this.handleColorChange}
-                        />
-                    </div>
-                </Tooltip>
+                <div className="picker">
+                    <ColorPicker
+                        type="sketch"
+                        small
+                        color={primaryColor}
+                        position="bottom"
+                        presetColors={[
+                            '#F5222D',
+                            '#FA541C',
+                            '#FA8C16',
+                            '#FAAD14',
+                            '#FADB14',
+                            '#A0D911',
+                            '#52C41A',
+                            '#13C2C2',
+                            '#1890FF',
+                            '#2F54EB',
+                            '#722ED1',
+                            '#EB2F96',
+                        ]}
+                        onChangeComplete={this.handleColorChange}
+                    />
+                </div>
             </div>
         );
     }

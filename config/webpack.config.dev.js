@@ -1,4 +1,4 @@
-'use strict';
+
 
 const path = require('path');
 const webpack = require('webpack');
@@ -14,6 +14,8 @@ const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+
+const theme = require('../src/theme');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -63,7 +65,14 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
 		},
 	];
 	if (preProcessor) {
-		loaders.push(require.resolve(preProcessor));
+		loaders.push({
+			loader: require.resolve(preProcessor),
+			options: {
+				sourceMap: false,
+				javascriptEnabled: true,
+				modifyVars: theme,
+			},
+		});
 	}
 	return loaders;
 };
@@ -313,15 +322,7 @@ module.exports = {
 					{
 						test: lessRegex,
 						exclude: lessModuleRegex,
-						use: [
-							...getStyleLoaders({ importLoaders: 2 }, 'less-loader'),
-							// {
-							// 	loader: require.resolve('less-loader'),
-							// 		options: {
-							// 		  	modifyVars: { "@primary-color": "#001529" },
-							// 		},
-							// }
-						],
+						use: getStyleLoaders({ importLoaders: 2 }, 'less-loader'),
 					},
 					// Adds support for CSS Modules, but using LESS
 					// using the extension .module.scss or .module.sass

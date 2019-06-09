@@ -3,14 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.less';
 import { Provider } from 'mobx-react';
 
-import systemStore from './store/systemStore';
-
-const store = {
-    systemStore,
-}
+import store from './store/index';
 
 ReactDOM.render(
     <Provider {...store}>
