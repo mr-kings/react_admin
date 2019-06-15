@@ -7,26 +7,26 @@
 import Loadable from 'react-loadable';
 import Loading from '@/components/spinnerLoading/index';
 
-const upload = Loadable({ // 按需加载
-    loader: () => import('../components/upload/index'),
-    loading: Loading,
+const upload = Loadable({
+	loader: () => import('@/components/upload/index'),
+	loading: Loading,
 });
-const home = Loadable({ // 按需加载
-    loader: () => import('./home/index'),
-    loading: Loading,
+const home = Loadable({
+	loader: () => import('./home/index'),
+	loading: Loading,
 });
-const notPermission = Loadable({ // 按需加载
-    loader: () => import('../components/error/notPermission'),
-    loading: Loading,
+const notPermission = Loadable({
+	loader: () => import('@/components/error/notPermission'),
+	loading: Loading,
 });
-const notFound = Loadable({ // 按需加载
-    loader: () => import('../components/error/notFound'),
-    loading: Loading,
+const notFound = Loadable({
+	loader: () => import('@/components/error/notFound'),
+	loading: Loading,
 });
 
 export default {
-    upload,
-    home,
-    notPermission,
-    notFound
-}
+	upload,
+	home,
+	notPermission,
+	notFound,
+};

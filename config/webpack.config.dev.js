@@ -1,5 +1,3 @@
-
-
 const path = require('path');
 const webpack = require('webpack');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
@@ -178,23 +176,26 @@ module.exports = {
 		strictExportPresence: true,
 		rules: [
 			// Disable require.ensure as it's not a standard language feature.
-			{ parser: { requireEnsure: false } },
+			{
+				parser: {
+					requireEnsure: false
+				}
+			},
 
 			// First, run the linter.
 			// It's important to do this before Babel processes the JS.
 			{
 				test: /\.(js|mjs|jsx)$/,
 				enforce: 'pre',
-				use: [
-					{
-						options: {
-							formatter: require.resolve('react-dev-utils/eslintFormatter'),
-							eslintPath: require.resolve('eslint'),
-
-						},
-						loader: require.resolve('eslint-loader'),
+				use: [{
+					options: {
+						formatter: require.resolve('react-dev-utils/eslintFormatter'),
+						eslintPath: require.resolve('eslint'),
+						//configFile: path.join(__dirname, '../.eslintrc'),
+						//useEslintrc: true
 					},
-				],
+					loader: require.resolve('eslint-loader'),
+				}],
 				include: paths.appSrc,
 			},
 			{
@@ -235,7 +236,11 @@ module.exports = {
 										},
 									},
 								],
-								['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
+								['import', {
+									libraryName: 'antd',
+									libraryDirectory: 'es',
+									style: true
+								}],
 							],
 							// This is a feature of `babel-loader` for webpack (not Babel itself).
 							// It enables caching results in ./node_modules/.cache/babel-loader/
@@ -258,7 +263,9 @@ module.exports = {
 							presets: [
 								[
 									require.resolve('babel-preset-react-app/dependencies'),
-									{ helpers: true },
+									{
+										helpers: true
+									},
 								],
 							],
 							cacheDirectory: true,
@@ -303,14 +310,15 @@ module.exports = {
 					{
 						test: sassRegex,
 						exclude: sassModuleRegex,
-						use: getStyleLoaders({ importLoaders: 2 }, 'sass-loader'),
+						use: getStyleLoaders({
+							importLoaders: 2
+						}, 'sass-loader'),
 					},
 					// Adds support for CSS Modules, but using SASS
 					// using the extension .module.scss or .module.sass
 					{
 						test: sassModuleRegex,
-						use: getStyleLoaders(
-							{
+						use: getStyleLoaders({
 								importLoaders: 2,
 								modules: true,
 								getLocalIdent: getCSSModuleLocalIdent,
@@ -322,14 +330,15 @@ module.exports = {
 					{
 						test: lessRegex,
 						exclude: lessModuleRegex,
-						use: getStyleLoaders({ importLoaders: 2 }, 'less-loader'),
+						use: getStyleLoaders({
+							importLoaders: 2
+						}, 'less-loader'),
 					},
 					// Adds support for CSS Modules, but using LESS
 					// using the extension .module.scss or .module.sass
 					{
 						test: lessModuleRegex,
-						use: getStyleLoaders(
-							{
+						use: getStyleLoaders({
 								importLoaders: 2,
 								modules: true,
 								getLocalIdent: getCSSModuleLocalIdent,

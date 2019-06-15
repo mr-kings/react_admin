@@ -1,0 +1,24 @@
+{
+  "eslint.autoFixOnSave": true,
+  "eslint.options": {
+    "extensions": [
+      ".js",
+      ".vue"
+    ]
+  },
+  "eslint.validate": [
+    "javascript",
+    {
+      "language": "react",
+      "autoFix": true
+    },
+    "html",
+    "vue"
+  ],
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "editor.fontSize": 16,
+  "editor.foldingStrategy": "indentation"
+}

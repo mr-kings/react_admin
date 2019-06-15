@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import Local from '../src/i18n/index';
-import Router from '../src/routes/appRouter';
+import I18nLocal from '@/i18n';
+import AppRouter from '@/routes/appRouter';
 import './App.css';
+
 class App extends Component {
-  render() {
-    return (
-      <Local>
-        <Router />
-      </Local>
-    );
-  }
+	render() {
+		return (
+			<I18nLocal>
+				<AppRouter />
+			</I18nLocal>
+		);
+	}
 }
 
 export default App;

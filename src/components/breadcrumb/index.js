@@ -1,8 +1,5 @@
-import React, {Component} from 'react';
-import {
-    Breadcrumb,
-    Icon
-} from 'antd';
+import React, { Component } from 'react';
+import { Breadcrumb, Icon } from 'antd';
 // import { Link } from 'react-router-dom';
 
 /**
@@ -13,20 +10,30 @@ import {
  * @extends {Component}
  */
 class BreadcrumbCustom extends Component {
-    render() {
-        const first = <Breadcrumb.Item>{this.props.first}</Breadcrumb.Item> || '';
-        const second = <Breadcrumb.Item>{this.props.second}</Breadcrumb.Item> || '';
-        return (
-            <div>
-                <Breadcrumb style={{ margin: '12px 0' }}>
-                    {/* <Link to={'/app/dashboard/index'}>首页</Link> */}
-                    <Breadcrumb.Item><Icon type="home" style={{marginRight: 6}} />首页</Breadcrumb.Item>
-                        {first}
-                        {second}
-                </Breadcrumb>
-            </div>
-        )
-    }
+	render() {
+		const first = <Breadcrumb.Item> {this.props.first} </Breadcrumb.Item> || '';
+		const second =
+			<Breadcrumb.Item> {this.props.second} </Breadcrumb.Item> || '';
+		return (
+			<Breadcrumb
+				style={{
+					margin: '12px 0',
+				}}
+			>
+				{/* <Link to={'/app/dashboard/index'}>首页</Link> */}
+				<Breadcrumb.Item>
+					<Icon
+						type="home"
+						style={{
+							marginRight: 6,
+						}}
+					/>
+					首页
+				</Breadcrumb.Item>
+				{first} {second}
+			</Breadcrumb>
+		);
+	}
 }
 
 export default BreadcrumbCustom;

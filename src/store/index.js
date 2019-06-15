@@ -1,5 +1,7 @@
 import systemStore from './systemStore';
 
-export default {
-    systemStore,
-}
+const stores = {
+	systemStore,
+};
+
+export default stores;
