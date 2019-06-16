@@ -1,3 +1,10 @@
+/*
+ * @Author: kim
+ * @Date: 2019-06-16 16:49:09
+ * @Last Modified by: kim
+ * @Last Modified time: 2019-06-16 16:49:27
+ * @Description: 系统配置
+ */
 import { observable, action, computed } from 'mobx';
 import { en_GB, zh_CN } from '@/i18n/langs';
 

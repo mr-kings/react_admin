@@ -10,7 +10,7 @@ const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
+//const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 
 const theme = require('../src/theme');
@@ -151,7 +151,7 @@ module.exports = {
 			// https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
 			'react-native': 'react-native-web',
 			// 全局相对路径别名，处理相对路径过长和繁琐问题
-			'@': paths.appSrc
+			'@': paths.appSrc,
 		},
 		plugins: [
 			// Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -178,8 +178,8 @@ module.exports = {
 			// Disable require.ensure as it's not a standard language feature.
 			{
 				parser: {
-					requireEnsure: false
-				}
+					requireEnsure: false,
+				},
 			},
 
 			// First, run the linter.
@@ -187,15 +187,17 @@ module.exports = {
 			{
 				test: /\.(js|mjs|jsx)$/,
 				enforce: 'pre',
-				use: [{
-					options: {
-						formatter: require.resolve('react-dev-utils/eslintFormatter'),
-						eslintPath: require.resolve('eslint'),
-						//configFile: path.join(__dirname, '../.eslintrc'),
-						//useEslintrc: true
+				use: [
+					{
+						options: {
+							formatter: require.resolve('react-dev-utils/eslintFormatter'),
+							eslintPath: require.resolve('eslint'),
+							//configFile: path.join(__dirname, '../.eslintrc'),
+							//useEslintrc: true
+						},
+						loader: require.resolve('eslint-loader'),
 					},
-					loader: require.resolve('eslint-loader'),
-				}],
+				],
 				include: paths.appSrc,
 			},
 			{
@@ -236,11 +238,14 @@ module.exports = {
 										},
 									},
 								],
-								['import', {
-									libraryName: 'antd',
-									libraryDirectory: 'es',
-									style: true
-								}],
+								[
+									'import',
+									{
+										libraryName: 'antd',
+										libraryDirectory: 'es',
+										style: true,
+									},
+								],
 							],
 							// This is a feature of `babel-loader` for webpack (not Babel itself).
 							// It enables caching results in ./node_modules/.cache/babel-loader/
@@ -264,7 +269,7 @@ module.exports = {
 								[
 									require.resolve('babel-preset-react-app/dependencies'),
 									{
-										helpers: true
+										helpers: true,
 									},
 								],
 							],
@@ -310,15 +315,19 @@ module.exports = {
 					{
 						test: sassRegex,
 						exclude: sassModuleRegex,
-						use: getStyleLoaders({
-							importLoaders: 2
-						}, 'sass-loader'),
+						use: getStyleLoaders(
+							{
+								importLoaders: 2,
+							},
+							'sass-loader'
+						),
 					},
 					// Adds support for CSS Modules, but using SASS
 					// using the extension .module.scss or .module.sass
 					{
 						test: sassModuleRegex,
-						use: getStyleLoaders({
+						use: getStyleLoaders(
+							{
 								importLoaders: 2,
 								modules: true,
 								getLocalIdent: getCSSModuleLocalIdent,
@@ -330,15 +339,19 @@ module.exports = {
 					{
 						test: lessRegex,
 						exclude: lessModuleRegex,
-						use: getStyleLoaders({
-							importLoaders: 2
-						}, 'less-loader'),
+						use: getStyleLoaders(
+							{
+								importLoaders: 2,
+							},
+							'less-loader'
+						),
 					},
 					// Adds support for CSS Modules, but using LESS
 					// using the extension .module.scss or .module.sass
 					{
 						test: lessModuleRegex,
-						use: getStyleLoaders({
+						use: getStyleLoaders(
+							{
 								importLoaders: 2,
 								modules: true,
 								getLocalIdent: getCSSModuleLocalIdent,

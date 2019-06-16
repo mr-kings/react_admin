@@ -1,17 +1,16 @@
+/*
+ * @Author: kim
+ * @Date: 2019-06-16 16:47:25
+ * @Last Modified by: kim
+ * @Last Modified time: 2019-06-16 16:48:05
+ * @Description: 根据路由配置文件生成菜单路由
+ */
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import AllComponents from '../views/index';
 import routesConfig from './config';
 import queryString from 'query-string';
 
-/**
- * @auther kim
- * @date 2019-5-6
- * @description 自定义路由
- * @class CustomRouter
- * @extends {Component}
- * TODO: 路由生成
- */
 class CustomRouter extends Component {
 	onRouterChange = route => {
 		this.props.onRouterChange(route);

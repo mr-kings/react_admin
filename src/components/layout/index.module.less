@@ -1,0 +1,30 @@
+.layoutWrap {
+	height: 100vh!important;
+	overflow: hidden;
+	.contentWrap{
+		margin: 0 16px;
+		height: 100%;
+		.breadcrumbWrap{
+			overflow: hidden;
+			height: 30px;
+			div[class~="ant-breadcrumb"]{
+				line-height: 30px;
+			}
+		}
+		.contentBox{
+			@diff : 30px;
+			height: calc(~"100% - @{diff}");
+			padding: 16px;
+			background: #fff;
+			overflow: auto;
+		}
+	}
+	.footerWrap[class~="ant-layout-footer"] {
+		padding: 5px;
+		text-align: center;
+	}
+}
+
+
+
+

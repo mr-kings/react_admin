@@ -8,5 +8,6 @@ export default {
 	},
 	antd: antdEn,
 	locale: 'en',
+	label: 'English',
 	data: appLocaleData,
 };

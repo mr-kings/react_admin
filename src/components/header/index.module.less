@@ -1,0 +1,77 @@
+.headerWrap{
+	width: 100%;
+	i{
+		color: #ffffff;
+	}
+}
+.customHeader[class~="ant-layout-header"]{
+	padding: 0 8px 0 50px
+}
+.headerMenu{
+	background: #000;
+	line-height: 64px;
+	float: right;
+	height: 100%;
+	li[class~="ant-menu-item"], li[class~="ant-menu-submenu"]{
+		height: 100%;
+		line-height: 64px;
+		padding: 0 8px;
+		i{
+			margin-top: 22px;
+		}
+	}
+	div[class~="ant-menu-submenu-title"]{
+		height: 100%;
+		line-height: 64px;
+		padding: 0;
+	}
+	li[class~="ant-menu-item-selected"]{
+		background-color: transparent!important;
+	}
+}
+.headerIcon[class~="anticon-fullscreen"]{
+	font-size: 22px!important;
+	margin-right: 0!important;
+}
+.headerI18n{
+	display: inline-block;
+	width: 65px;
+  text-align: center;
+}
+.avatar {
+	position: relative;
+	display: inline-block;
+	width: 40px;
+	line-height: 1;
+	border-radius: 500px;
+	white-space: nowrap;
+	font-weight: bold;
+	img{
+		border-radius: 50%;
+		width: 100%;
+	}
+	i {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 10px;
+		height: 10px;
+		margin: 1px;
+		border-width: 2px;
+		border-style: solid;
+		border-radius: 100%;
+	}
+	i.bottom {
+		left: auto;
+		top: auto;
+		bottom: 0;
+		right: 0;
+	}
+	i.on {
+		background-color: #6cc788;
+	}
+}
+.headerTrigger{
+	font-size: 20px;
+	margin-left: -34px;
+}

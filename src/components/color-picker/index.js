@@ -1,5 +1,12 @@
+/*
+ * @Author: kim
+ * @Date: 2019-06-16 00:43:32
+ * @Last Modified by: kim
+ * @Last Modified time: 2019-06-16 16:59:27
+ */
 import React, { Component } from 'react';
 import { ChromePicker, SketchPicker } from 'react-color';
+import style from './index.module.less';
 
 const noop = () => {};
 
@@ -8,7 +15,7 @@ const pickers = {
 	sketch: SketchPicker,
 };
 
-export default class Index extends Component {
+class ColorPicker extends Component {
 	static defaultProps = {
 		onChange: noop,
 		onChangeComplete: noop,
@@ -95,6 +102,7 @@ export default class Index extends Component {
 			wrapper: {
 				position: 'inherit',
 				zIndex: '100',
+				right: '-120px',
 			},
 		};
 
@@ -108,8 +116,9 @@ export default class Index extends Component {
 				<div style={styles.color} />
 			</div>
 		);
+
 		const picker = displayColorPicker ? (
-			<div style={styles.popover}>
+			<div style={styles.popover} className={style.pickerWrap}>
 				<div style={styles.cover} onClick={this.handleClose} />
 				<div style={styles.wrapper}>
 					<Picker
@@ -124,15 +133,17 @@ export default class Index extends Component {
 
 		if (position === 'top') {
 			return (
-				<div>
+				<>
 					{picker} {swatch}
-				</div>
+				</>
 			);
 		}
 		return (
-			<div>
+			<>
 				{swatch} {picker}
-			</div>
+			</>
 		);
 	}
 }
+
+export default ColorPicker;

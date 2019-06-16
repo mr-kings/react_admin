@@ -73,6 +73,7 @@ class SiderCustom extends Component {
 	// 点击菜单
 	menuClick = e => {
 		const { openKey } = this.state;
+		console.info('menuClick', e);
 		this.setState({
 			selectedKey: e.key,
 			firstHide: e.key.indexOf(openKey) !== -1 ? false : true, // 如果当前key包含展开的父菜单，说明是同级子节点，不隐藏父节点
@@ -89,6 +90,11 @@ class SiderCustom extends Component {
 
 	render() {
 		const { openKey, selectedKey, firstHide, mode } = this.state;
+		const logoStyle = {
+			height: '32px',
+			background: 'rgba(255, 255, 255, 0.2)',
+			margin: '16px',
+		};
 		return (
 			<Sider
 				breakpoint="lg"
@@ -99,7 +105,7 @@ class SiderCustom extends Component {
 					overflowY: 'auto',
 				}}
 			>
-				<div className="logo" />
+				<div className="logo" style={logoStyle} />
 				<SiderMenu
 					menus={routes.menus}
 					theme="dark"

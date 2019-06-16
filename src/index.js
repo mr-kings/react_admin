@@ -7,6 +7,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import 'antd/dist/antd.less';
+import '@/assets/styles/common.css';
 import './index.css';
 
 import stores from './store';

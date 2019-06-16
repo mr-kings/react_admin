@@ -1,21 +1,22 @@
+/*
+ * @Author: kim
+ * @Date: 2019-06-16 00:46:01
+ * @Last Modified by: kim
+ * @Last Modified time: 2019-06-16 16:07:10
+ * @Description: 头部导航
+ */
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import screenfull from 'screenfull';
 import avater from '@/assets/imgs/avater.png';
-import { Menu, Icon, Layout, Radio } from 'antd';
+import { Menu, Icon, Layout } from 'antd';
 import ThemeColorPicker from '../header-color-picker/index';
-import './index.css';
+import cx from 'classnames';
+import styles from './index.module.less';
 const { Header } = Layout;
 const { SubMenu } = Menu;
 const MenuItemGroup = Menu.ItemGroup;
 
-/**
- * 自定义头部导航
- * @author kim
- * @date 2019-4-14
- * @class CustomHeader
- * @extends {Component}
- */
 @inject('systemStore')
 @observer
 class CustomHeader extends Component {
@@ -32,56 +33,46 @@ class CustomHeader extends Component {
 	};
 
 	// 切换语言
-	changeLocale = e => {
-		const localeValue = e.target.value;
-		this.props.systemStore.setCurrentLocal(localeValue);
+	onHandleLocal = ({ item, key }) => {
+		this.props.systemStore.setCurrentLocal(key);
 	};
 
 	render() {
 		const { currentLocal } = this.props.systemStore;
 		return (
-			<div className="headerWrap">
-				<Header className="custom-header">
+			<div className={styles.headerWrap}>
+				<Header className={styles.customHeader}>
 					<Icon
-						className="header__trigger"
+						className={styles.headerTrigger}
 						type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'}
 						onClick={this.props.toggle}
 					/>
-					<Menu
-						mode="horizontal"
-						style={{
-							lineHeight: '64px',
-							float: 'right',
-						}}
-					>
+					<Menu mode="horizontal" theme="dark" className={styles.headerMenu}>
 						<Menu.Item key="full" onClick={this.screenFull}>
 							<Icon
-								className="headerIcon"
+								className={styles.headerIcon}
 								type="fullscreen"
 								onClick={this.screenFull}
 							/>
 						</Menu.Item>
-						<Menu.Item key="color">
+						<Menu.Item key="color" className={styles.headerColorPicker}>
 							<ThemeColorPicker />
-						</Menu.Item>
-						<Menu.Item key="i18n">
-							<Radio.Group
-								defaultValue={currentLocal.antd.locale}
-								onChange={this.changeLocale}
-							>
-								<Radio.Button key="en_gb" value="en-gb">
-									English
-								</Radio.Button>
-								<Radio.Button key="zh_cn" value="zh-cn">
-									中文
-								</Radio.Button>
-							</Radio.Group>
 						</Menu.Item>
 						<SubMenu
 							title={
-								<span className="avatar">
+								<span className={styles.headerI18n}>{currentLocal.label}</span>
+							}
+							onClick={this.onHandleLocal}
+						>
+							<Menu.Item key="zh-cn">简体中文</Menu.Item>
+							<Menu.Item key="en-gb">English</Menu.Item>
+						</SubMenu>
+
+						<SubMenu
+							title={
+								<span className={styles.avatar}>
 									<img src={avater} alt="头像" />
-									<i className="on bottom b-white" />
+									<i className={cx(styles.on, styles.bottom)} />
 								</span>
 							}
 						>

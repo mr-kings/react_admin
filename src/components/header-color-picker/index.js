@@ -1,9 +1,15 @@
+/*
+ * @Author: kim
+ * @Date: 2019-06-16 00:48:10
+ * @Last Modified by: kim
+ * @Last Modified time: 2019-06-16 16:43:51
+ */
 import React, { Component } from 'react';
 import { Icon } from 'antd';
 import { loadScript } from '@/utils/index';
 import ColorPicker from '@/components/color-picker';
 import theme from '@/theme';
-import './style.less';
+import styles from './index.module.less';
 
 const ROUTE_BASE_NAME = process.env.PUBLIC_URL || '';
 
@@ -13,9 +19,9 @@ const OLD_LESS_ID = `less:${BASE_NAME ? BASE_NAME + '-' : ''}color:old`;
 const LESS_ID = `less:${BASE_NAME ? BASE_NAME + '-' : ''}color`;
 const LESS_URL = `${ROUTE_BASE_NAME}/less.min.js`;
 
-export default class ThemeColorPicker extends Component {
-	constructor(...props) {
-		super(...props);
+class ThemeColorPicker extends Component {
+	constructor(props) {
+		super(props);
 
 		this.state = {
 			primaryColor:
@@ -101,11 +107,10 @@ export default class ThemeColorPicker extends Component {
 	};
 
 	render() {
-		const { className } = this.props;
 		const { primaryColor } = this.state;
 		return (
-			<div className={`colorPickRoot theme-color-picker ${className}`}>
-				<div className="picker">
+			<div className={styles.colorPickRoot}>
+				<div className={styles.picker}>
 					<ColorPicker
 						type="sketch"
 						small
@@ -132,3 +137,5 @@ export default class ThemeColorPicker extends Component {
 		);
 	}
 }
+
+export default ThemeColorPicker;

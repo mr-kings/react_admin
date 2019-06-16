@@ -8,5 +8,6 @@ export default {
 	},
 	antd: antdZh,
 	locale: 'zh',
+	label: '简体中文',
 	data: appLocaleData,
 };

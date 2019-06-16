@@ -1,3 +1,10 @@
+/*
+ * @Author: kim
+ * @Date: 2019-06-16 16:45:31
+ * @Last Modified by: kim
+ * @Last Modified time: 2019-06-16 16:45:51
+ * @Description: 国际化
+ */
 import React, { Component } from 'react';
 import { LocaleProvider } from 'antd';
 import moment from 'moment';
@@ -5,11 +12,6 @@ import 'moment/locale/zh-cn';
 import { observer, inject } from 'mobx-react';
 import { IntlProvider, addLocaleData } from 'react-intl';
 
-/**
- * 国际化
- * @class LocalLanguage
- * @extends {Component}
- */
 @inject('systemStore')
 @observer
 class LocalLanguage extends Component {
