@@ -1,5 +1,3 @@
-
-
 const path = require('path');
 const webpack = require('webpack');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
@@ -16,7 +14,6 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
-const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 
 const theme = require('../src/theme');
@@ -176,13 +173,13 @@ module.exports = {
 					parser: safePostCssParser,
 					map: shouldUseSourceMap
 						? {
-							// `inline: false` forces the sourcemap to be output into a
-							// separate file
-							inline: false,
-							// `annotation: true` appends the sourceMappingURL to the end of
-							// the css file, helping the browser find the sourcemap
-							annotation: true,
-						}
+								// `inline: false` forces the sourcemap to be output into a
+								// separate file
+								inline: false,
+								// `annotation: true` appends the sourceMappingURL to the end of
+								// the css file, helping the browser find the sourcemap
+								annotation: true,
+						  }
 						: false,
 				},
 			}),
@@ -219,7 +216,7 @@ module.exports = {
 			// https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
 			'react-native': 'react-native-web',
 			// 全局相对路径别名，处理相对路径过长和繁琐问题
-			'@': paths.appSrc
+			'@': paths.appSrc,
 		},
 		plugins: [
 			// Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -256,7 +253,6 @@ module.exports = {
 						options: {
 							formatter: require.resolve('react-dev-utils/eslintFormatter'),
 							eslintPath: require.resolve('eslint'),
-
 						},
 						loader: require.resolve('eslint-loader'),
 					},
@@ -301,7 +297,10 @@ module.exports = {
 										},
 									},
 								],
-								['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
+								[
+									'import',
+									{ libraryName: 'antd', libraryDirectory: 'es', style: true },
+								],
 							],
 							cacheDirectory: true,
 							// Save disk space when time isn't as important
@@ -404,10 +403,13 @@ module.exports = {
 					{
 						test: lessRegex,
 						exclude: lessModuleRegex,
-						loader: getStyleLoaders({
-							importLoaders: 2,
-							sourceMap: shouldUseSourceMap,
-						}, 'less-loader'),
+						loader: getStyleLoaders(
+							{
+								importLoaders: 2,
+								sourceMap: shouldUseSourceMap,
+							},
+							'less-loader'
+						),
 					},
 					// Adds support for CSS Modules, but using LESS
 					// using the extension .module.scss or .module.sass

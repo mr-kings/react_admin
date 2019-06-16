@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import I18nLocal from '@/i18n';
-import AppRouter from '@/routes/appRouter';
+import I18nLocal from './i18n/index';
+import AppRouter from './routes/appRouter';
 import './App.css';
 
 class App extends Component {
