@@ -16,7 +16,6 @@ const { Sider } = Layout;
 class SiderCustom extends Component {
 	// state、props更新触发 不仅 render 时会被调用，setState 时也会被触发 会在每次re-rendering之前被调用
 	static getDerivedStateFromProps(props, state) {
-		console.info('getDerivedStateFromProps state', state);
 		// 当点击收缩展开时触发
 		if (props.collapsed !== state.collapsed) {
 			// 设置菜单的展开与收缩
@@ -65,7 +64,6 @@ class SiderCustom extends Component {
 
 	// 组件挂载成功
 	componentDidMount() {
-		console.info('componentDidMount', this.props);
 		const state = SiderCustom.setMenuOpen(this.props);
 		this.setState(state);
 	}
@@ -73,7 +71,6 @@ class SiderCustom extends Component {
 	// 点击菜单
 	menuClick = e => {
 		const { openKey } = this.state;
-		console.info('menuClick', e);
 		this.setState({
 			selectedKey: e.key,
 			firstHide: e.key.indexOf(openKey) !== -1 ? false : true, // 如果当前key包含展开的父菜单，说明是同级子节点，不隐藏父节点

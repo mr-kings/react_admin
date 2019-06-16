@@ -2,7 +2,7 @@
  * @Author: kim
  * @Date: 2019-06-16 16:45:31
  * @Last Modified by: kim
- * @Last Modified time: 2019-06-16 16:45:51
+ * @Last Modified time: 2019-06-16 18:56:41
  * @Description: 国际化
  */
 import React, { Component } from 'react';
@@ -62,8 +62,6 @@ class LocalLanguage extends Component {
 			systemStore: { getCurrentLocal },
 		} = this.props;
 		const appLocale = getCurrentLocal;
-		console.info('-locale-', JSON.stringify(appLocale.locale));
-		console.info('-messages-', JSON.stringify(appLocale.messages));
 		addLocaleData(appLocale.data);
 		const local = appLocale.antd.locale;
 		if (local) moment.locale(local);
