@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
+//import { FormattedMessage } from 'react-intl';
 import styles from './index.module.less';
+import Parent from './parent';
 
 class Home extends Component {
 	render() {
 		return (
 			<div className={styles.homeWrap}>
-				<FormattedMessage id="home.name" />
+				<Parent></Parent>
+				{/* <FormattedMessage id="home.name" />
 				<br />
 				<FormattedMessage id="home.name" />
 				<br />
@@ -77,7 +79,7 @@ class Home extends Component {
 				<FormattedMessage id="home.name" />
 				<br />
 				<FormattedMessage id="home.name" />
-				<br />
+				<br /> */}
 			</div>
 		);
 	}
