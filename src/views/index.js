@@ -7,8 +7,28 @@
 import Loadable from 'react-loadable';
 import Loading from '@/components/spinnerLoading/index';
 
-const upload = Loadable({
-	loader: () => import('@/components/upload/index'),
+const userList = Loadable({
+	loader: () => import('@/views/user/userList'),
+	loading: Loading,
+});
+const userScore = Loadable({
+	loader: () => import('@/views/user/userScore'),
+	loading: Loading,
+});
+const userSearch = Loadable({
+	loader: () => import('@/views/user/userSearch'),
+	loading: Loading,
+});
+const userFeedback = Loadable({
+	loader: () => import('@/views/user/userFeedback'),
+	loading: Loading,
+});
+const garbageSort = Loadable({
+	loader: () => import('@/views/garbage/garbageSort'),
+	loading: Loading,
+});
+const garbageList = Loadable({
+	loader: () => import('@/views/garbage/garbageList'),
 	loading: Loading,
 });
 const home = Loadable({
@@ -25,8 +45,13 @@ const notFound = Loadable({
 });
 
 export default {
-	upload,
 	home,
+	userList,
+	userScore,
+	userSearch,
+	userFeedback,
+	garbageSort,
+	garbageList,
 	notPermission,
 	notFound,
 };

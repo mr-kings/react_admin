@@ -1,87 +1,47 @@
-import React, { Component } from 'react';
-//import { FormattedMessage } from 'react-intl';
-import styles from './index.module.less';
-import Parent from './parent';
+import React from 'react';
 
-class Home extends Component {
+import ChartContainer from '@/components/chart-container';
+import Tab from '@/components/tab';
+
+import CONST from '@/utils/constants';
+import './index.module.less';
+
+const { TABS } = CONST;
+
+class Demo extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			currentTab: 0,
+		};
+	}
+
+	changeTab = key => {
+		this.setState({
+			currentTab: parseInt(key, 10),
+		});
+	};
+
 	render() {
+		const { currentTab } = this.state;
+
 		return (
-			<div className={styles.homeWrap}>
-				<Parent></Parent>
-				{/* <FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br />
-				<FormattedMessage id="home.name" />
-				<br /> */}
+			<div className="page-wrapper">
+				<Tab data={TABS} selected={currentTab} changeTab={this.changeTab} />
+				<div className="tab-pane">
+					{CONST[`PANEL${currentTab}`].map((item, index) => (
+						<ChartContainer
+							title={item.title}
+							key={`${currentTab}-${index}`}
+							style={{ width: item.oneline ? '100%' : '100%' }}
+							item={item}
+						/>
+					))}
+				</div>
 			</div>
 		);
 	}
 }
-export default Home;
+
+export default Demo;
